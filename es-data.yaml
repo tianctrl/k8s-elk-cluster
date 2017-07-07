@@ -6,8 +6,6 @@ metadata:
   labels:
     k8s-app: elasticsearch-logging
     version: v1
-    kubernetes.io/cluster-service: "true"
-    addonmanager.kubernetes.io/mode: Reconcile
     role: data
 spec:
   replicas: 2
@@ -16,13 +14,12 @@ spec:
       labels:
         k8s-app: elasticsearch-logging
         version: v1
-        kubernetes.io/cluster-service: "true"
         role: data
     spec:
       serviceAccountName: es-data
       containers:
       - name: es-data
-        image: tianctrl/k8s-es-image
+        image: onlyerich/elasticsearch:v2.4.1-2
         imagePullPolicy: Always
         resources:
           # need more cpu upon initialization, therefore burstable class
