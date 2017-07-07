@@ -43,9 +43,15 @@
 
           kubectl create ns efk-logs
 
+  - 创建config map 
+
+          kubectl create configmap -n efk-logs kibana-config --from-file=kibana.yml --dry-run -o yaml | kubectl apply -n efk-logs -f -
+
   - 部署
 
-          kubectl create -f .
+          kubectl create -f ./es
+          kubectl create -f ./fluentd
+          kubectl create -f ./kibana
   
   - 查看pod启动情况
 
